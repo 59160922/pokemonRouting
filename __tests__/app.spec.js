@@ -38,16 +38,16 @@ describe('Pokemon API',()=>{
             })
         })
     })
-    describe('POST /pokemon',()=>{
+    describe('POST /pokemons',()=>{
         it('should return 201 Created and have new pokemon',(done)=>{
-            request(app).post('/pokemon')
+            request(app).post('/pokemons')
             .send({name:"Arbok",type:"Poison"})
             .set('Accept','application/json')
             .expect(201,done)
             
         })
         it('should return 400 Bad Request when missed required field',(done)=>{
-            request(app).post('/pokemon',{type:"Poison"})
+            request(app).post('/pokemons',{type:"Poison"})
             .send({type:"Poison"})
             .set('Accept','application/json')
             .expect(400)
@@ -86,8 +86,8 @@ describe('Pokemon API',()=>{
 
 
 describe('Integraion test',()=>{
-    it('GET / pokemons should return list of pokimons ',(done) =>{
-        request('http://localhost:3000').get('/pokemon')
+    it('GET / pokemons should return list of pokemons ',(done) =>{
+        request('http://localhost:3000').get('/pokemons')
         .expect(200)
         .end((err,res)=>{
             res.body.should.be.a('array')
